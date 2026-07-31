@@ -1,12 +1,12 @@
 const allData = [
   // ===== 顶部导航 =====
   [`Recent Repositories`, `最近仓库`],
-  [`Search or jump to…`, `搜索并跳转至...`],
+  [`Search or jump to…`, `搜索或跳转到…`],
   [`Issues`, `问题`],
-  [`Pull requests`, `合并请求`],
+  [`Pull requests`, `拉取请求`],
   [`Marketplace`, `市场`],
   [`Explore`, `探索`],
-  [`Following`, `关注者`],
+  [`Following`, `关注中`],
   [`Find a repository…`, `查找仓库`],
   [`Latest changes`, `最新变化`],
   [`hours ago`, `小时前`],
@@ -17,7 +17,7 @@ const allData = [
 
   // ===== 用户菜单 =====
   [`Set status`, `设置状态`],
-  [`Your profile`, `个人信息`],
+  [`Your profile`, `个人资料`],
   [`Your repositories`, `个人仓库`],
   [`Your codespaces`, `你的 Codespaces`],
   [`Your projects`, `你的项目`],
@@ -34,9 +34,9 @@ const allData = [
   [`Repositories`, `仓库`],
   [`Packages`, `包`],
   [`Popular repositories`, `热门仓库`],
-  [`Edit profile`, `编辑个人信息`],
-  [`followers`, ` 被关注`],
-  [`following`, ` 关注`],
+  [`Edit profile`, `编辑个人资料`],
+  [`followers`, ` 关注者`],
+  [`following`, ` 关注中`],
   [`Public`, `公开`],
   [`Customize your pins`, `自定义你的置顶项目`],
   [`Contribution settings`, `贡献设置`],
@@ -49,11 +49,11 @@ const allData = [
 
   // ===== 仓库页面 =====
   [`Code`, `代码`],
-  [`Go to file`, `转至文件`],
+  [`Go to file`, `转到文件`],
   [`Add file`, `添加文件`],
   [`About`, `关于`],
   [`Pin`, `置顶`],
-  [`Pin this repository to your profile`, `置顶这个项目到你的个人信息`],
+  [`Pin this repository to your profile`, `置顶这个项目到你的个人资料`],
   [`New repository`, `新建仓库`],
   [`Import repository`, `导入仓库`],
   [`New organization`, `新建组织`],
@@ -136,9 +136,9 @@ const allData = [
   [`Accessibility`, `无障碍`],
   [`Notifications`, `通知`],
   [`Access`, `访问`],
-  [`Personal billing`, `个人账单`],
+  [`Personal billing`, `个人计费`],
   [`Emails`, `邮箱`],
-  [`Billing and plans`, `账单和计划`],
+  [`Billing and plans`, `计费和计划`],
   [`This is a list of SSH keys associated with your account. Remove any keys that you do not recognize.`,
     `这是与你账户关联的 SSH 密钥列表，删除任何不认识的密钥。`],
   [`Organizations`, `组织`],
@@ -160,7 +160,7 @@ const allData = [
 
   // ===== Issues 和 Pull Requests =====
   [`Label issues and pull requests for new contributors`,
-    `为新贡献者标记问题和合并请求`],
+    `为新贡献者标记问题和拉取请求`],
   [`Filters`, `筛选`],
   [`New Issue`, `新建问题`],
   [`There aren't any open issues.`, `没有公开的问题。`],
@@ -205,7 +205,7 @@ const allData = [
   [`Old password`, `旧密码`],
   [`New password`, `新密码`],
   [`Confirm new password`, `确认新密码`],
-  [`Two-factor authentication`, `两步验证`],
+  [`Two-factor authentication`, `双重身份验证`],
   [`Confirm access`, `确认访问`],
   [`Confirm`, `确认`],
   [`Who has access`, `谁有权限`],
@@ -248,10 +248,10 @@ const allData = [
   [`Social Preview`, `社交预览`],
   [`Upload an image to customize your repository's social media preview.`,
     `上传图片以自定义仓库的社交预览。`],
-  [`Pull Requests`, `合并请求`],
+  [`Pull Requests`, `拉取请求`],
 
   // ===== 危险区 =====
-  [`Danger Zone`, `危险区`],
+  [`Danger Zone`, `危险区域`],
   [`Change repository visibility`, `更改仓库可见性`],
   [`Transfer ownership`, `转让所有权`],
   [`This repository is currently public.`, `此仓库当前为公开。`],
@@ -381,7 +381,7 @@ const allData = [
   [`Dashboard`, `仪表板`],
   [`Actions`, `操作`],
   [`Wiki`, `维基`],
-  [`Insights`, `统计`],
+  [`Insights`, `Insights`],
   [`Projects`, `项目`],
   [`Security`, `安全`],
   [`Pulse`, `动态`],
@@ -405,10 +405,10 @@ const allData = [
   [`Create branch`, `创建分支`],
   [`Delete branch`, `删除分支`],
   [`Compare changes`, `比较更改`],
-  [`Create pull request`, `创建合并请求`],
+  [`Create pull request`, `创建拉取请求`],
   [`Merge pull request`, `合并拉取请求`],
-  [`Close pull request`, `关闭合并请求`],
-  [`Reopen pull request`, `重新打开合并请求`],
+  [`Close pull request`, `关闭拉取请求`],
+  [`Reopen pull request`, `重新打开拉取请求`],
   [`Request review`, `请求审查`],
   [`Assign`, `分配`],
   [`Label`, `标签`],
@@ -448,7 +448,7 @@ const allData = [
   [`GPG keys`, `GPG 密钥`],
   [`OAuth apps`, `OAuth 应用`],
   [`Personal access tokens`, `个人访问令牌`],
-  [`Billing`, `账单`],
+  [`Billing`, `计费`],
   [`Sponsors`, `赞助者`],
 
   // ===== 搜索与筛选 =====
@@ -473,7 +473,7 @@ const allData = [
   // ===== 新增：仓库交互 =====
   [`Use this template`, `使用此模板`],
   [`Create a new issue`, `创建新问题`],
-  [`Compare & pull request`, `比较并创建合并请求`],
+  [`Compare & pull request`, `比较并创建拉取请求`],
   [`<> Code`, `<> 代码`],
   [`No description, website, or topics provided.`, `未提供描述、网站或主题。`],
   [`Readme`, `自述文件`],
@@ -504,10 +504,10 @@ const allData = [
   [`Compare`, `比较`],
 
   // ===== 新增：PR / Issue 详情 =====
-  [`conversation`, `对话`],
-  [`commits`, `提交`],
+  [`conversation`, `会话`],
+  [`commits`, `提交记录`],
   [`checks`, `检查`],
-  [`files changed`, `文件变更`],
+  [`files changed`, `更改的文件`],
   [`Show all checks`, `显示所有检查`],
   [`Merge branch`, `合并分支`],
   [`Rebase and merge`, `变基并合并`],
@@ -553,7 +553,7 @@ const allData = [
   [`Members`, `成员`],
   [`Teams`, `团队`],
   [`Audit log`, `审计日志`],
-  [`Billing & Licensing`, `账单与许可`],
+  [`Billing & Licensing`, `计费与许可`],
 
   // ===== 新增：GitHub Mobile =====
   [`Mobile`, `移动端`],

@@ -41,8 +41,8 @@ githubCN/
 
 | 分类               | 示例                                 |
 | ------------------ | ------------------------------------ |
-| 顶部导航           | Pull requests → 合并请求             |
-| 用户菜单           | Your profile → 个人信息              |
+| 顶部导航           | Pull requests → 拉取请求             |
+| 用户菜单           | Your profile → 个人资料              |
 | 个人主页           | Overview / Repositories / Packages   |
 | 仓库页面           | Code / Issues / Actions / Wiki       |
 | 新建仓库流程       | Owner / Repository name / License    |
@@ -82,7 +82,10 @@ const allData = [
 
 ## 版本
 
-**1.5**（当前）：
+**1.6**（当前）：
+- 对齐官方术语: 参照 [docs.github.com/zh](https://docs.github.com/zh) 修正 16 处翻译用语（Pull requests → 拉取请求、Profile → 个人资料、Billing → 计费 等）
+
+**1.5**：
 - 修复: 表单提交按钮的 `data-signin-label` / `data-disable-with` 属性污染问题（Bug #1）
 - 移除: 过于宽泛的 `['s', '']` 匹配规则
 - 扩充: 新增 100+ 条翻译词条（Copilot、Codespaces、Gist、Sponsor 等）

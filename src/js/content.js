@@ -597,62 +597,72 @@ const MutationObserverConfig = {
   characterData: true,
 };
 
+let translateTimer = null;
 const observer = new MutationObserver(function (mutations) {
-  const treeWalker = document.createTreeWalker(
-    document.body,
-    NodeFilter.SHOW_ALL,
-    {
-      acceptNode: function (node) {
-        if (
-          node.nodeType === 3 ||
-          (node.hasAttribute &&
-            (node.hasAttribute("data-label") ||
-              node.hasAttribute("placeholder") ||
-              node.hasAttribute("value")))
-        ) {
-          return NodeFilter.FILTER_ACCEPT;
-        } else {
-          return NodeFilter.FILTER_SKIP;
+  // Prevent self-triggered infinite loop: debounce and disconnect before modifying DOM
+  if (translateTimer) clearTimeout(translateTimer);
+  translateTimer = setTimeout(() => {
+    observer.disconnect();
+    try {
+      const treeWalker = document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_ALL,
+        {
+          acceptNode: function (node) {
+            if (
+              node.nodeType === 3 ||
+              (node.hasAttribute &&
+                (node.hasAttribute("data-label") ||
+                  node.hasAttribute("placeholder") ||
+                  node.hasAttribute("value")))
+            ) {
+              return NodeFilter.FILTER_ACCEPT;
+            } else {
+              return NodeFilter.FILTER_SKIP;
+            }
+          },
+        },
+        false
+      );
+      let dataMap = new Map();
+      allData.forEach(([key, val]) => {
+        if (key && !dataMap.has(key)) {
+          dataMap.set(key, val);
         }
-      },
-    },
-    false
-  );
-  let dataMap = new Map();
-  allData.forEach(([key, val]) => {
-    if (key && !dataMap.has(key)) {
-      dataMap.set(key, val);
-    }
-  });
-  let currentNode = treeWalker.currentNode;
-  while (currentNode) {
-    if (currentNode.nodeType === 3) {
-      let key1 = currentNode.textContent
-        .replace(/^\s*|\s*$/g, "")
-        .replace(/\s+/g, " ");
-      if (dataMap.has(key1)) currentNode.textContent = dataMap.get(key1);
-    } else {
-      let key2 = currentNode.getAttribute("data-label");
-      if (key2 && dataMap.has(key2))
-        currentNode.setAttribute("data-label", dataMap.get(key2));
-      let key3 = currentNode.getAttribute("placeholder") || "";
-      if ((key3 = key3.trim())) {
-        if (dataMap.has(key3))
-          currentNode.setAttribute("placeholder", dataMap.get(key3));
+      });
+      let currentNode = treeWalker.currentNode;
+      while (currentNode) {
+        if (currentNode.nodeType === 3) {
+          let key1 = currentNode.textContent
+            .replace(/^\s*|\s*$/g, "")
+            .replace(/\s+/g, " ");
+          if (dataMap.has(key1)) currentNode.textContent = dataMap.get(key1);
+        } else {
+          let key2 = currentNode.getAttribute("data-label");
+          if (key2 && dataMap.has(key2))
+            currentNode.setAttribute("data-label", dataMap.get(key2));
+          let key3 = currentNode.getAttribute("placeholder") || "";
+          if ((key3 = key3.trim())) {
+            if (dataMap.has(key3))
+              currentNode.setAttribute("placeholder", dataMap.get(key3));
+          }
+          let key4 = currentNode.getAttribute("value");
+          if (currentNode.tagName == "INPUT" && dataMap.has(key4)) {
+            currentNode.setAttribute("value", dataMap.get(key4));
+            let key5 = currentNode.getAttribute("data-signin-label");
+            if (key5 && dataMap.has(key5))
+              currentNode.setAttribute("data-signin-label", dataMap.get(key5));
+            let key6 = currentNode.getAttribute("data-disable-with");
+            if (key6 && dataMap.has(key6))
+              currentNode.setAttribute("data-disable-with", dataMap.get(key6));
+          }
+        }
+        currentNode = treeWalker.nextNode();
       }
-      let key4 = currentNode.getAttribute("value");
-      if (currentNode.tagName == "INPUT" && dataMap.has(key4)) {
-        currentNode.setAttribute("value", dataMap.get(key4));
-        let key5 = currentNode.getAttribute("data-signin-label");
-        if (key5 && dataMap.has(key5))
-          currentNode.setAttribute("data-signin-label", dataMap.get(key5));
-        let key6 = currentNode.getAttribute("data-disable-with");
-        if (key6 && dataMap.has(key6))
-          currentNode.setAttribute("data-disable-with", dataMap.get(key6));
-      }
+    } finally {
+      observer.observe(document.body, MutationObserverConfig);
     }
-    currentNode = treeWalker.nextNode();
-  }
+  }, 200);
 });
 
 observer.observe(document.body, MutationObserverConfig);

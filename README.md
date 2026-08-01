@@ -82,7 +82,18 @@ const allData = [
 
 ## 版本
 
-**1.6**（当前）：
+**1.6.3**（当前）：
+- 尝试修复: 文件列表中 `<relative-time>` 元素的时间文本（如"6 minutes ago"）不翻译的问题，在元素节点处理中增加对 `RELATIVE-TIME` / `TIME-AGO` 标签的直接处理（**已知仍不生效，待进一步排查**）
+
+**1.6.2**：
+- 新增: 15 条时间相关静态词条（just now → 刚刚、yesterday → 昨天、Commits → 次提交 等）
+- 新增: 文本节点正则 fallback，将 `\d+ minutes ago` 等动态时间转为中文
+- 新增: `\d+ Commits` → `\d+ 次提交`、`\d+ Branches` → `\d+ 个分支` 等正则翻译
+
+**1.6.1**：
+- 修复: MutationObserver 修改文本节点后自身触发新 mutation 导致页面卡死（无限递归），加入 200ms debounce + disconnect/observe 防自触发机制
+
+**1.6**：
 - 对齐官方术语: 参照 [docs.github.com/zh](https://docs.github.com/zh) 修正 16 处翻译用语（Pull requests → 拉取请求、Profile → 个人资料、Billing → 计费 等）
 
 **1.5**：

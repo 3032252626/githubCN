@@ -588,6 +588,25 @@ const allData = [
   // ===== 新增：Tabs =====
   [`Bookmarks`, `书签`],
   [`Recent`, `最近`],
+  // ===== 相对时间 =====
+  [`just now`, `刚刚`],
+  [`a minute ago`, `1分钟前`],
+  [`an hour ago`, `1小时前`],
+  [`yesterday`, `昨天`],
+  [`last week`, `上周`],
+  [`last month`, `上个月`],
+  [`last year`, `去年`],
+  [`a year ago`, `1年前`],
+  // ===== 仓库页面 =====
+  [`Contribute`, `参与贡献`],
+  [`Sync fork`, `同步复刻`],
+  [`Commits`, `次提交`],
+  [`Branches`, `分支`],
+  [`Tags`, `标签`],
+  [`Security and quality`, `安全与质量`],
+  [`This branch is`, `此分支`],
+  [`commits ahead of`, `次提交领先于`],
+  [`commit ahead of`, `次提交领先于`],
 ];
 
 const MutationObserverConfig = {
@@ -636,7 +655,17 @@ const observer = new MutationObserver(function (mutations) {
           let key1 = currentNode.textContent
             .replace(/^\s*|\s*$/g, "")
             .replace(/\s+/g, " ");
-          if (dataMap.has(key1)) currentNode.textContent = dataMap.get(key1);
+          if (dataMap.has(key1)) { currentNode.textContent = dataMap.get(key1); }
+          else {
+            let m;
+            if ((m = key1.match(/^(\d+) minutes? ago$/))) currentNode.textContent = m[1] + '分钟前';
+            else if ((m = key1.match(/^(\d+) hours? ago$/))) currentNode.textContent = m[1] + '小时前';
+            else if ((m = key1.match(/^(\d+) days? ago$/))) currentNode.textContent = m[1] + '天前';
+            else if ((m = key1.match(/^(\d+) months? ago$/))) currentNode.textContent = m[1] + '个月前';
+            else if ((m = key1.match(/^(\d+) years? ago$/))) currentNode.textContent = m[1] + '年前';
+            else if ((m = key1.match(/^(\d+) Commits$/))) currentNode.textContent = m[1] + ' 次提交';
+            else if ((m = key1.match(/^(\d+) Branches$/))) currentNode.textContent = m[1] + ' 个分支';
+          }
         } else {
           let key2 = currentNode.getAttribute("data-label");
           if (key2 && dataMap.has(key2))

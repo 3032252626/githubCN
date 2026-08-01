@@ -667,6 +667,22 @@ const observer = new MutationObserver(function (mutations) {
             else if ((m = key1.match(/^(\d+) Branches$/))) currentNode.textContent = m[1] + ' 个分支';
           }
         } else {
+          let tag = currentNode.tagName;
+          // Handle <relative-time> and <time-ago> elements directly
+          if (tag === 'RELATIVE-TIME' || tag === 'TIME-AGO') {
+            let text = currentNode.textContent.replace(/^\s*|\s*$/g, '').replace(/\s+/g, ' ');
+            if (text) {
+              if (dataMap.has(text)) { currentNode.textContent = dataMap.get(text); }
+              else {
+                let m;
+                if ((m = text.match(/^(\d+) minutes? ago$/))) currentNode.textContent = m[1] + '分钟前';
+                else if ((m = text.match(/^(\d+) hours? ago$/))) currentNode.textContent = m[1] + '小时前';
+                else if ((m = text.match(/^(\d+) days? ago$/))) currentNode.textContent = m[1] + '天前';
+                else if ((m = text.match(/^(\d+) months? ago$/))) currentNode.textContent = m[1] + '个月前';
+                else if ((m = text.match(/^(\d+) years? ago$/))) currentNode.textContent = m[1] + '年前';
+              }
+            }
+          }
           let key2 = currentNode.getAttribute("data-label");
           if (key2 && dataMap.has(key2))
             currentNode.setAttribute("data-label", dataMap.get(key2));

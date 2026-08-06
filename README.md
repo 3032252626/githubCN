@@ -3,7 +3,7 @@
 > 原作者：[JQiue](https://github.com/JQiue/githubCN)  
 > 本文档由 AI 辅助维护，内容源自上游仓库与实际代码分析
 
-Github 浏览器中文汉化插件，通过 MutationObserver 监听 DOM 变化，将 GitHub 页面上的英文文本节点实时替换为中文翻译。支持 Manifest V3。
+Github 浏览器中文汉化插件，通过 MutationObserver 监听 DOM 变化，将 GitHub 页面上的英文文本节点实时替换为中文翻译。支持 Manifest V3 和 Tampermonkey 油猴脚本。
 
 ## 功能概述
 
@@ -11,14 +11,31 @@ Github 浏览器中文汉化插件，通过 MutationObserver 监听 DOM 变化�
 - 支持文本节点、`placeholder`、`data-label` 等属性的翻译
 - 基于 MutationObserver 的动态翻译，兼容 GitHub 的 SPA 导航
 - 轻量级，仅在 `github.com` 域名下运行
+- **新增：Tampermonkey 油猴脚本版本**，无需安装浏览器扩展
 
 ## 安装
+
+### 方式一：浏览器扩展（推荐）
 
 | 浏览器           | 方式                                                                                         |
 | ---------------- | -------------------------------------------------------------------------------------------- |
 | Edge             | [Edge 应用商店](https://microsoftedge.microsoft.com/addons/detail/githubcn/onlodfoebaobhmlhgcbddjngjbkdbfaj) |
 | Google Chrome    | 下载源代码，在 `chrome://extensions` 开启「开发者模式」后拖放 `src` 文件夹或加载已解压的扩展目录 |
 | 其他 Chromium 系 | 与 Chrome 相同，加载 `src` 目录即可                                                          |
+
+### 方式二：Tampermonkey 油猴脚本
+
+适用于不想安装浏览器扩展的用户，或需要在受限环境中使用。
+
+**安装步骤：**
+1. 浏览器安装 [Tampermonkey](https://www.tampermonkey.net/) 扩展
+2. 点击 [githubCN.user.js](https://github.com/3032252626/githubCN/blob/main/githubCN.user.js) 直接安装
+3. 或打开 Tampermonkey 面板 → 新建脚本 → 复制粘贴代码 → 保存
+
+**优势：**
+- 无需安装浏览器扩展
+- 自动更新（GitHub 原生支持）
+- 兼容所有支持 Tampermonkey 的浏览器
 
 ## 文件结构
 
@@ -30,6 +47,7 @@ githubCN/
 │   │   ├── background.js    # Service Worker（空，预留）
 │   │   └── content.js       # 核心翻译逻辑 + 词条数据
 │   └── img/                 # 插件图标
+├── githubCN.user.js         # Tampermonkey 油猴脚本
 ├── app.js                   # 打包/开发辅助脚本
 ├── package.json
 └── README.md
@@ -59,6 +77,7 @@ githubCN/
 
 ## 如何补充翻译词条
 
+### 扩展版本
 编辑 `src/js/content.js`，在 `allData` 数组中按格式添加：
 
 ```js
@@ -69,7 +88,10 @@ const allData = [
 ];
 ```
 
-规则：
+### 油猴脚本版本
+编辑 `githubCN.user.js`，在 `allData` 数组中按相同格式添加。
+
+**规则：**
 - key 必须与页面上 textContent 完全一致（含空格、标点）
 - 键重复时以首次出现的为准
 - 支持 `placeholder`、`data-label` 等属性的自动翻译
@@ -83,6 +105,7 @@ const allData = [
 ## 版本
 
 **1.6.3**（当前）：
+- 新增: Tampermonkey 油猴脚本版本（`githubCN.user.js`）
 - 尝试修复: 文件列表中 `<relative-time>` 元素的时间文本（如"6 minutes ago"）不翻译的问题，在元素节点处理中增加对 `RELATIVE-TIME` / `TIME-AGO` 标签的直接处理（**已知仍不生效，待进一步排查**）
 
 **1.6.2**：
